@@ -10,8 +10,8 @@ export const store = reactive({
     //PARAMS
     apiKeyParams: "api_key",
     apiKey: "234ab6b846070d0218770bc0f363a089",
-    apiInputParams: "query",
-    apiInput: "",
+    apiSearchParams: "query",
+    apiSearchInput: "",
     //SAVING DATA ARRAY 
     movies: [],
     seiresTv: [],
