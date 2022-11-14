@@ -1,4 +1,4 @@
-<!-- SEARCH BAR INSIDE HEADER -->
+<!-- SEARCH BAR  -->
 <script>
 import { store } from "../store"
 export default {
@@ -9,11 +9,16 @@ export default {
             input: "",
         }
     },
+    emits: {
+        btnClicked: null,
+    },
     methods: {
         saveInput() {
             //Save user input in the store
             this.store.apiSearchInput = this.input;
-            console.log(this.store.apiSearchInput)
+            // console.log(this.store.apiSearchInput)
+            this.$emit('btnClicked');
+            this.input = "";
         }
     }
 }
@@ -24,7 +29,7 @@ export default {
     <label for="search" class="sr-only">Search a movie or a series TV</label>
     <input type="text" id="search" placeholder="Search a movie" v-model="input">
 
-    <button @click="saveInput()"> Search </button>
+    <button class="btn btn-search" @click="saveInput()"> Search </button>
 </template>
  
 <style lang="scss" scoped>
