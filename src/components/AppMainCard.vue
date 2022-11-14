@@ -3,11 +3,11 @@
 export default {
     name: "AppMainCard",
     props: {
-        title: String,
+        titleMain: String,
         titleOriginal: String,
         language: String,
         // String or Number?
-        vote: String,
+        vote: Number,
     }
 }
 </script>
@@ -16,7 +16,7 @@ export default {
     <ul>
         <li>
             <div>
-                <div>{{ title }} </div>
+                <div>{{ titleMain }} </div>
                 <div>{{ titleOriginal }}</div>
                 <div>{{ language }}</div>
                 <div>{{ vote }}</div>

@@ -8,18 +8,42 @@ export default {
         AppMainCard,
     },
     data() {
-        return { store }
+        return {
+            store,
+        }
     }
 }
 </script>
  
 <template>
-    <hr>
-    <h4>{{ store.apiKey }}</h4>
-    <hr>
-    <AppMainCard title="titolo" titleOriginal="titoloOriginale" language="it" vote="3" />
+    <h4>MAIN</h4>
+
+    <div class="poster-wrapper" v-if="store.apiSearchInput">
+        <AppMainCard class="poster-cards" v-for="(movie, index) in store.movies" :key="index" :titleMain="movie.title"
+            :titleOriginal="movie.original_title" :language="movie.original_language" :vote="movie.vote_average" />
+    </div>
+    <div v-else>
+        <span>Search</span>
+    </div>
 </template>
  
-<style lang="scss" scoped>
 
+
+
+
+<style lang="scss" scoped>
+.poster-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+
+
+    .poster-cards {
+
+        //DEBUG
+        border: 2px solid black;
+        background-color: white;
+        margin: .5em;
+    }
+
+}
 </style>
