@@ -17,9 +17,22 @@ export default {
     }
   },
   created() {
-    axios.get(this.store.apiExampleMovie)
-      .then((resp) => console.log(resp))
-      .catch((err) => ("Error", err))
+    this.searchApi()
+  },
+  methods: {
+    searchApi() {
+      let params = {};
+      let urlApi = this.store.apiSearchMovie;
+      params[store.apiKeyParams] = this.store.apiKey;
+      params[store.apiSearchParams] = this.store.apiSearchInput;
+      if (this.store.apiSearchInput !== "") {
+        axios.get(urlApi, { params })
+          .then((resp) =>
+            console.log(resp.data.results),
+          )
+          .catch((err) => ("Error", err))
+      }
+    }
   }
 }
 </script>
