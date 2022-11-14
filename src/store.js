@@ -19,4 +19,8 @@ export const store = reactive({
 
     //LANGUAGES 
     // languages: ["en", "it","es", "fr", "pt", "ja", "de", "ko"],
+
+    //IMAGES with w342
+    imgLink: "https://image.tmdb.org/t/p/w342"
+
 });

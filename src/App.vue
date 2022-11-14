@@ -23,7 +23,7 @@ export default {
     searchApi() {
       let urlApi = `${this.store.apiSearch}${this.store.apiGenreMovie}`
       let urlApiSeries = `${this.store.apiSearch}${this.store.apiGenreTv}`
-      //params
+      //PARAMS ObJ
       let params = {};
       params[store.apiKeyParams] = this.store.apiKey;
       params[store.apiSearchParams] = this.store.apiSearchInput;
@@ -31,7 +31,7 @@ export default {
         //MOVIES
         axios.get(urlApi, { params })
           .then((resp) => {
-            console.log(resp.data.results),
+            console.log("movies", resp.data.results),
               this.store.movies = resp.data.results
           }
           )
@@ -39,13 +39,13 @@ export default {
         //SERIES
         axios.get(urlApiSeries, { params })
           .then((resp) => {
-            console.log(resp.data.results),
+            console.log("series", resp.data.results),
               this.store.seriesTv = resp.data.results
           }
           )
           .catch((err) => ("Error", err))
       }
-    },
+    }
   }
 }
 </script>

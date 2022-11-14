@@ -8,8 +8,10 @@ export default {
         languageImg: String,
         languageTxt: String,
         vote: Number,
-        //true si vedono le bandiere // false il testo 
+        //true countries flag // false  txt
         languageInStore: Boolean,
+        //img cover
+        imgPoster: String,
     },
 }
 </script>
@@ -17,6 +19,11 @@ export default {
 <template>
     <ul>
         <li>
+
+            <div>
+                <img :src="imgPoster" :alt="titleMain">
+            </div>
+
             <div>
                 <div>{{ titleMain }} </div>
                 <div>{{ titleOriginal }}</div>

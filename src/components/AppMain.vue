@@ -53,8 +53,7 @@ export default {
             //     }
             // })
 
-        },
-
+        }
     }
 }
 </script>
@@ -68,7 +67,8 @@ export default {
                     :titleMain="movie.title" :titleOriginal="movie.original_title"
                     :languageTxt="movie.original_language" :vote="movie.vote_average"
                     :languageImg="getImageUrl(movie.original_language)"
-                    :languageInStore="showImgOrTxt(movie.original_language)" />
+                    :languageInStore="showImgOrTxt(movie.original_language)"
+                    :imgPoster="`${this.store.imgLink}${movie.poster_path}`" />
             </div>
         </div>
 
@@ -79,13 +79,16 @@ export default {
                     :titleMain="series.name" :titleOriginal="series.original_name"
                     :languageTxt="series.original_language" :vote="series.vote_average"
                     :languageImg="getImageUrl(series.original_language)"
-                    :languageInStore="showImgOrTxt(series.original_language)" />
+                    :languageInStore="showImgOrTxt(series.original_language)"
+                    :imgPoster="`${this.store.imgLink}${series.poster_path}`" />
             </div>
         </div>
 
-        <div v-if="store.movies.length == 0 && store.seriesTv.length == 0">
+        <!-- 
+        PROBLEMI CHIAMATA AXIOS ARRIVA DOPO COMPARE MSG PRIMA DEL CARICAMENTO DELLO STORE
+        <div v-if="store.movies.length == 0 && store.seriesTv.length == 0 && store.apiSearchInput">
             Nessun elemento trovato
-        </div>
+        </div> -->
     </div>
 
     <div v-else>
