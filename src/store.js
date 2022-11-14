@@ -14,9 +14,8 @@ export const store = reactive({
     apiSearchInput: "",
     //SAVING DATA ARRAY 
     movies: [],
-    seiresTv: [],
+    seriesTv: [],
 
-    //DEBUG
-    apiExampleMovie: "https://api.themoviedb.org/3/search/movie?api_key=234ab6b846070d0218770bc0f363a089&query=inception",
-    apiExample: [],
+    //LANGUAGES 
+    // languages: ["en", "it","es", "fr", "pt", "ja", "de", "ko"],
 });

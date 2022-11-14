@@ -5,10 +5,12 @@ export default {
     props: {
         titleMain: String,
         titleOriginal: String,
-        language: String,
-        // String or Number?
+        languageImg: String,
+        languageTxt: String,
         vote: Number,
-    }
+        //true si vedono le bandiere // false il testo 
+        languageInStore: Boolean,
+    },
 }
 </script>
  
@@ -18,7 +20,14 @@ export default {
             <div>
                 <div>{{ titleMain }} </div>
                 <div>{{ titleOriginal }}</div>
-                <div>{{ language }}</div>
+                <div>
+                    <div v-if="languageInStore">
+                        <img :src="languageImg" :alt="languageTxt">
+                    </div>
+                    <div v-else>
+                        <p>{{ languageTxt }}</p>
+                    </div>
+                </div>
                 <div>{{ vote }}</div>
             </div>
         </li>
@@ -26,5 +35,7 @@ export default {
 </template>
  
 <style lang="scss" scoped>
-
+img {
+    width: 40px;
+}
 </style>
