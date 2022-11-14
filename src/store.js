@@ -6,7 +6,8 @@ export const store = reactive({
     apiUrlInfo: "https://developers.themoviedb.org/3/getting-started/introduction",
     //SEARCH LINK
     apiSearch: "https://api.themoviedb.org/3/search/",
-    apiGenre: "movie",  // Movie or TV
+    apiGenreMovie: "movie",  // Movie or TV
+    apiGenreTv: "tv",
     //PARAMS
     apiKeyParams: "api_key",
     apiKey: "234ab6b846070d0218770bc0f363a089",

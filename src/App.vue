@@ -19,18 +19,16 @@ export default {
       store
     }
   },
-  created() {
-    this.searchApi()
-  },
   methods: {
     searchApi() {
-
-      let urlApi = `${this.store.apiSearch}${this.store.apiGenre}`
+      let urlApi = `${this.store.apiSearch}${this.store.apiGenreMovie}`
+      let urlApiSeries = `${this.store.apiSearch}${this.store.apiGenreTv}`
       //params
       let params = {};
       params[store.apiKeyParams] = this.store.apiKey;
       params[store.apiSearchParams] = this.store.apiSearchInput;
       if (this.store.apiSearchInput !== "") {
+        //MOVIES
         axios.get(urlApi, { params })
           .then((resp) => {
             console.log(resp.data.results),
@@ -38,11 +36,16 @@ export default {
           }
           )
           .catch((err) => ("Error", err))
+        //SERIES
+        axios.get(urlApiSeries, { params })
+          .then((resp) => {
+            console.log(resp.data.results),
+              this.store.seriesTv = resp.data.results
+          }
+          )
+          .catch((err) => ("Error", err))
       }
     },
-    // showConsole() {
-    //   console.log(this.store.apiSearchInput);
-    // }
   }
 }
 </script>
