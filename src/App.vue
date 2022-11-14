@@ -1,7 +1,9 @@
 <!-- APP VUE -->
 
 <script>
-import { store } from "./store"
+import { store } from "./store";
+import axios from "axios";
+
 import AppHeader from "./components/AppHeader.vue";
 import AppMain from "./components/AppMain.vue";
 export default {
@@ -13,6 +15,11 @@ export default {
     return {
       store
     }
+  },
+  created() {
+    axios.get(this.store.apiExampleMovie)
+      .then((resp) => console.log(resp))
+      .catch((err) => ("Error", err))
   }
 }
 </script>

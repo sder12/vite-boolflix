@@ -18,4 +18,5 @@ export const store = reactive({
 
     //DEBUG
     apiExampleMovie: "https://api.themoviedb.org/3/search/movie?api_key=234ab6b846070d0218770bc0f363a089&query=inception",
+    apiExample: [],
 });
