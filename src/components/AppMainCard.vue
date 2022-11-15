@@ -1,21 +1,38 @@
 <!-- CARD in MAIN -->
 <script>
+import { store } from "../store"
 export default {
     name: "AppMainCard",
     props: {
-        //TITLE
-        titleMain: String,
-        titleOriginal: String,
-        //LANGUAGE
-        languageImg: String,
-        languageTxt: String,
-        //true countries flag // false  txt
-        languageInStore: Boolean,
-        //VOTE STARS NUMBERS
-        vote: Number,
-        voteNot: Number,
-        //POSTER IMG
-        imgPoster: String,
+        item: Object,
+    },
+    data() {
+        return {
+            store
+        }
+    },
+    methods: {
+        //Language IMG  Flag ---> return src content
+        getImageUrl(lan) {
+            let urlImg = `../assets/languages/${lan}.svg`
+            return new URL(urlImg, import.meta.url).href
+        }
+    },
+    computed: {
+        fullStars() {
+            const numbersStars = Math.round(parseInt(this.item.vote_average) / 2);
+            return numbersStars
+        },
+        emptyStars() {
+            const numbersNotStars = 5 - (Math.round(parseInt(this.item.vote_average) / 2));
+            return numbersNotStars
+        },
+        getTitle() {
+            return this.item.title ? this.item.title : this.item.name
+        },
+        getOriginalTitle() {
+            return this.item.original_title ? this.item.original_title : this.item.original_name
+        }
     }
 }
 </script>
@@ -24,32 +41,32 @@ export default {
     <ul>
         <li>
             <div>
-                <img :src="imgPoster" :alt="titleMain">
+                <img :src="`${this.store.imgLink}${item.poster_path}`" :alt="item.title">
             </div>
 
             <div>
                 <!-- TITLE -->
                 <div>
-                    {{ titleMain }}
+                    {{ getTitle }}
                 </div>
                 <!-- ORIGINAL TITLE -->
-                <div v-show="titleMain !== titleOriginal">
-                    {{ titleOriginal }}
+                <div v-show="getOriginalTitle !== getTitle">
+                    {{ getOriginalTitle }}
                 </div>
                 <!-- LANGUAGE -->
                 <div>
-                    <div v-if="languageInStore">
-                        <img :src="languageImg" :alt="languageTxt">
+                    <div v-if="this.store.languages.includes(item.original_language)">
+                        <img :src="getImageUrl(item.original_language)" :alt="item.original_language">
                     </div>
                     <div v-else>
-                        <p>{{ languageTxt }}</p>
+                        <p>{{ item.original_language }}</p>
                     </div>
                 </div>
                 <!-- STARS -->
                 <div>
                     <ul>
-                        <li v-for="n in vote"> &starf;</li>
-                        <li v-for="m in voteNot"> &star;</li>
+                        <li v-for="n in fullStars"> &starf; </li>
+                        <li v-for="m in emptyStars"> &star;</li>
                     </ul>
                 </div>
             </div>

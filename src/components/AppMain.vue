@@ -5,47 +5,13 @@ import AppMainCard from './AppMainCard.vue';
 export default {
     name: "AppMain",
     components: {
-        AppMainCard,
+        AppMainCard
     },
     data() {
         return {
-            store,
-        }
-    },
-    methods: {
-        //Language IMG  Flag ---> return src content
-        getImageUrl(lan) {
-            let urlImg = "";
-            if (this.store.languages.includes(lan)) {
-                urlImg = `../assets/languages/${lan}.svg`
-            } else {
-                urlImg = `data:,`
-            }
-            return new URL(urlImg, import.meta.url).href
-        },
-        //Languages TEXT showing Img or Text--> return Boolean
-        showImgOrTxt(lan) {
-            if (this.store.languages.includes(lan)) {
-                //true showing Img
-                return true
-            } else {
-                //false showing Text
-                return false
-            }
-        },
-        //Full Star 
-        fifthsNumbers(number) {
-            let numbersFifth = Math.round(number / 2);
-            return numbersFifth
-        },
-        //Empty Star
-        calcOutOfFive(number) {
-            // const numbersFifth = fifts;
-            const numbersMinus = 5 - this.fifthsNumbers(number);
-            return numbersMinus
+            store
         }
     }
-
 }
 </script>
  
@@ -54,30 +20,21 @@ export default {
     <div v-if="store.apiSearchInput">
 
         <!-- MOVIES CARDS -->
-        <div v-if="store.movies.length !== 0">
+        <section v-if="store.movies.length !== 0">
             <h4>MOVIES</h4>
             <div class="poster-wrapper">
-                <AppMainCard class="poster-cards" v-for="(movie, index) in store.movies" :key="index"
-                    :titleMain="movie.title" :titleOriginal="movie.original_title"
-                    :languageTxt="movie.original_language" :vote="fifthsNumbers(movie.vote_average)"
-                    :voteNot="calcOutOfFive(movie.vote_average)" :languageImg="getImageUrl(movie.original_language)"
-                    :languageInStore="showImgOrTxt(movie.original_language)"
-                    :imgPoster="`${this.store.imgLink}${movie.poster_path}`" />
+                <AppMainCard class="poster-cards" v-for="movie in store.movies" :key="movie.id" :item="movie" />
             </div>
-        </div>
+        </section>
 
         <!-- SERIES TV CARDS -->
-        <div v-if="store.seriesTv.length !== 0">
+        <section v-if="store.seriesTv.length !== 0">
             <h4>SERIES</h4>
             <div class="poster-wrapper">
-                <AppMainCard class="poster-cards" v-for="(series, index) in store.seriesTv" :key="index"
-                    :titleMain="series.name" :titleOriginal="series.original_name"
-                    :languageTxt="series.original_language" :vote="fifthsNumbers(series.vote_average)"
-                    :voteNot="calcOutOfFive(series.vote_average)" :languageImg="getImageUrl(series.original_language)"
-                    :languageInStore="showImgOrTxt(series.original_language)"
-                    :imgPoster="`${this.store.imgLink}${series.poster_path}`" />
+                <AppMainCard class="poster-cards" v-for="serie in store.seriesTv" :key="serie.id" :item="serie" />
             </div>
-        </div>
+
+        </section>
 
         <!--  "Nessun elemento trovato" +  "Loading"
         PROBLEMI CHIAMATA AXIOS ARRIVA DOPO COMPARE MSG PRIMA DEL CARICAMENTO DELLO STORE       
