@@ -109,3 +109,47 @@ h4 {
 
 }
 </style>
+            
+            
+            
+            
+<style lang = "scss" scoped >
+@use "../styles/partials/mixins" as *;
+@use "../styles/partials/variables" as *;
+
+//DIV without movies
+#search-first,
+#search-not-found {
+    text-align: center;
+    padding: 4em;
+    font-size: 1rem;
+    text-transform: uppercase;
+}
+
+//Movies Cards styling
+
+h4 {
+    padding: 1em .5em;
+    margin: 0 1em;
+    font-weight: 500;
+    font-size: .8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background-color: lighten($bg-color, 10%);
+}
+
+
+
+.poster-wrapper {
+    @include flex(row, flex-start, stretch);
+    flex-wrap: wrap;
+    gap: 1em;
+    margin-left: 1em;
+
+    .poster-cards {
+        width: calc(100% / 4 - 1em);
+        border: 1px solid white;
+    }
+
+}
+</style>

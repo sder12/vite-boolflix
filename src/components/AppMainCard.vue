@@ -1,5 +1,6 @@
 <!-- CARD in MAIN -->
 <script>
+
 import { store } from "../store"
 export default {
     name: "AppMainCard",
@@ -8,7 +9,9 @@ export default {
     },
     data() {
         return {
-            store
+            store,
+            posterFront: true,
+            posterBack: false,
         }
     },
     methods: {
@@ -38,54 +41,101 @@ export default {
 </script>
  
 <template>
-    <ul>
+    <ul id="card">
         <li>
-            <div>
+            <!-- FRONT -->
+            <div id="poster-front" v-show="posterFront">
                 <img :src="`${this.store.imgLink}${item.poster_path}`" :alt="item.title">
             </div>
 
-            <div>
-                <!-- TITLE -->
-                <div>
-                    {{ getTitle }}
-                </div>
-                <!-- ORIGINAL TITLE -->
-                <div v-show="getOriginalTitle !== getTitle">
-                    {{ getOriginalTitle }}
-                </div>
-                <!-- LANGUAGE -->
-                <div>
-                    <div v-if="this.store.languages.includes(item.original_language)">
-                        <img :src="getImageUrl(item.original_language)" :alt="item.original_language">
-                    </div>
-                    <div v-else>
-                        <p>{{ item.original_language }}</p>
-                    </div>
-                </div>
-                <!-- STARS -->
-                <div>
-                    <ul>
-                        <li v-for="n in fullStars">
-                            <i class="fa-solid fa-star"></i>
+            <!-- BACK -->
+            <div id="poster-back" v-show="posterBack">
+                <ul>
+                    <!-- TITLE -->
+                    <li>
+                        <div>
+                            <h5> Titolo </h5>{{ getTitle }}
+                        </div>
+                    </li>
 
-                        </li>
-                        <li v-for="m in emptyStars">
-                            <i class="fa-regular fa-star"></i>
-                        </li>
-                    </ul>
-                </div>
+                    <!-- ORIGINAL TITLE -->
+                    <li>
+                        <div v-show="getOriginalTitle !== getTitle">
+                            <h5> Titolo originale</h5>
+                            {{ getOriginalTitle }}
+                        </div>
+                    </li>
+
+                    <!-- STARS -->
+                    <li>
+                        <h5>Voto</h5>
+                        <ul id="stars-vote">
+                            <li v-for="n in fullStars">
+                                <i class="fa-solid fa-star"></i>
+                            </li>
+                            <li v-for="m in emptyStars">
+                                <i class="fa-regular fa-star"></i>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <!-- LANGUAGE -->
+                    <li id="language">
+                        <h5>Language </h5>
+                        <div v-if="this.store.languages.includes(item.original_language)">
+                            <img :src="getImageUrl(item.original_language)" :alt="item.original_language">
+                        </div>
+                        <div v-else>
+                            <p>{{ item.original_language }}</p>
+                        </div>
+                    </li>
+
+                </ul>
             </div>
-
         </li>
     </ul>
 </template>
  
 <style lang="scss" scoped>
-ul {
-    display: flex;
+@use "../styles/partials/mixins" as *;
+@use "../styles/partials/variables" as *;
+
+#card {
+    background-color: $bg-header;
 }
 
-img {
-    width: 40px;
+#poster-front {
+    width: 100%;
+
+    img {
+        width: 100%;
+        display: block;
+    }
+}
+
+#poster-back {
+    width: 100%;
+    padding: 10px 20px;
+
+    li {
+        margin: 5px 0;
+    }
+
+    h5 {
+        text-transform: uppercase;
+        color: darken(white, 30%);
+        padding: 6px 0 px;
+    }
+
+    #language {
+        img {
+            width: 20px;
+        }
+    }
+
+    #stars-vote {
+        @include flex(row, flex-start, center);
+    }
+
 }
 </style>
