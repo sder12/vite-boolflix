@@ -65,8 +65,13 @@ export default {
                 <!-- STARS -->
                 <div>
                     <ul>
-                        <li v-for="n in fullStars"> &starf; </li>
-                        <li v-for="m in emptyStars"> &star;</li>
+                        <li v-for="n in fullStars">
+                            <i class="fa-solid fa-star"></i>
+
+                        </li>
+                        <li v-for="m in emptyStars">
+                            <i class="fa-regular fa-star"></i>
+                        </li>
                     </ul>
                 </div>
             </div>
