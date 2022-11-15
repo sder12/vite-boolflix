@@ -18,7 +18,7 @@ export const store = reactive({
     seriesTv: [],
 
     //LANGUAGES 
-    languages: ["en", "it", "es", "fr", "pt", "ja", "de", "ko", "sv", "da", "hi"],
+    languages: ["en", "it", "es", "fr", "pt", "ja", "de", "ko", "sv", "da", "hi", "nl"],
 
     //IMAGES with w342
     imgLink: "https://image.tmdb.org/t/p/w342"

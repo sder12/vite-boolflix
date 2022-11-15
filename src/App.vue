@@ -5,8 +5,8 @@ import { store } from "./store";
 import axios from "axios";
 
 import AppLogo from "./components/AppLogo.vue";
-import AppMain from "./components/AppMain.vue";
 import AppSearch from './components/AppSearch.vue';
+import AppMain from "./components/AppMain.vue";
 
 export default {
   components: {
@@ -74,4 +74,11 @@ export default {
  
 <style lang="scss">
 @use "./styles/general.scss" as *;
+@use "./styles/partials/mixins" as *;
+
+
+.header {
+  @include flex(row, space-between, center);
+  padding: 3em 0 1em;
+}
 </style>

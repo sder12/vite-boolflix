@@ -28,7 +28,7 @@ export default {
 <template>
 
     <label for="search" class="sr-only">Search a movie or a series TV</label>
-    <input type="text" id="search" placeholder="Search a movie" v-model="input" @keyup.enter="saveInput()">
+    <input type="search" id="search" placeholder="Search a movie" v-model="input" @keyup.enter="saveInput()">
 
     <button class="btn btn-search" @click="saveInput()"> Search </button>
 </template>
