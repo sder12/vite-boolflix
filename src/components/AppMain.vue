@@ -34,12 +34,12 @@ export default {
  
 <template>
     <!-- first research -->
-    <div v-if="firstSearch">
-        <span>fai la tua prima ricerca </span>
+    <div v-if="firstSearch" id="search-first">
+        <span> fai la tua prima ricerca </span>
     </div>
 
     <!--  research without result -->
-    <div v-if="notFoundSearch">
+    <div v-if="notFoundSearch" id="search-not-found">
         <span> Nessun elemento trovato </span>
     </div>
 
@@ -47,7 +47,7 @@ export default {
     <div v-else>
         <!-- MOVIES CARDS -->
         <section v-if="thereAreMovies">
-            <h4>MOVIES</h4>
+            <h4>Movies</h4>
             <div class="poster-wrapper">
                 <AppMainCard class="poster-cards" v-for="movie in store.movies" :key="movie.id" :item="movie" />
             </div>
@@ -55,7 +55,7 @@ export default {
 
         <!-- SERIES TV CARDS -->
         <section v-if="store.seriesTv.length !== 0">
-            <h4>SERIES</h4>
+            <h4>Series Tv</h4>
             <div class="poster-wrapper">
                 <AppMainCard class="poster-cards" v-for="serie in store.seriesTv" :key="serie.id" :item="serie" />
             </div>
@@ -70,20 +70,41 @@ export default {
             
             
 <style lang = "scss" scoped >
-h4 {
-    // DEBUG
-    padding: 2em 0;
+@use "../styles/partials/mixins" as *;
+@use "../styles/partials/variables" as *;
+
+//DIV without movies
+#search-first,
+#search-not-found {
+    text-align: center;
+    padding: 4em;
+    font-size: 1rem;
+    text-transform: uppercase;
 }
 
-.poster-wrapper {
-    display: flex;
-    flex-wrap: wrap;
+//Movies Cards styling
 
+h4 {
+    padding: 1em .5em;
+    margin: 0 1em;
+    font-weight: 500;
+    font-size: .8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background-color: lighten($bg-color, 10%);
+}
+
+
+
+.poster-wrapper {
+    @include flex(row, flex-start, stretch);
+    flex-wrap: wrap;
+    gap: 1em;
+    margin-left: 1em;
 
     .poster-cards {
-        //DEBUG
-        border: 2px solid black;
-        margin: .5em;
+        width: calc(100% / 4 - 1em);
+        border: 1px solid white;
     }
 
 }
