@@ -1,4 +1,4 @@
-<!-- HEADER -->
+<!-- LOGO -->
 <script>
 export default {
     name: "AppLogo",
@@ -6,11 +6,14 @@ export default {
 </script>
  
 <template>
-    <h2>Boolfix</h2>
-
-
+    <h1 class="logo">Boolfix</h1>
 </template>
  
 <style lang="scss" scoped>
+@use "../styles/partials/variables" as *;
 
+.logo {
+    color: $logo-color;
+    text-transform: uppercase;
+}
 </style>

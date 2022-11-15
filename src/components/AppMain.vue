@@ -24,6 +24,9 @@ export default {
                 && this.store.loadingSeries == true && this.store.loadingMovies == true) {
                 return true
             }
+        },
+        thereAreMovies() {
+            return this.store.movies.length !== 0 ? true : false
         }
     }
 }
@@ -43,7 +46,7 @@ export default {
     <!-- research with results -->
     <div v-else>
         <!-- MOVIES CARDS -->
-        <section v-if="store.movies.length !== 0">
+        <section v-if="thereAreMovies">
             <h4>MOVIES</h4>
             <div class="poster-wrapper">
                 <AppMainCard class="poster-cards" v-for="movie in store.movies" :key="movie.id" :item="movie" />
@@ -69,7 +72,6 @@ export default {
 <style lang = "scss" scoped >
 h4 {
     // DEBUG
-    background-color: white;
     padding: 2em 0;
 }
 
@@ -79,10 +81,8 @@ h4 {
 
 
     .poster-cards {
-
         //DEBUG
         border: 2px solid black;
-        background-color: white;
         margin: .5em;
     }
 

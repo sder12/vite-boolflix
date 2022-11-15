@@ -58,18 +58,24 @@ export default {
   <div class="container">
 
     <!-- HEADER -->
-    <header class="header">
-      <div class="header__menu">
-        <AppLogo />
-      </div>
-      <div class="header__search">
-        <AppSearch @btnClicked="searchApi()" />
+    <header class="bg-header header">
+      <div class="wrapper header__flex">
+        <section class="header__menu">
+          <AppLogo />
+        </section>
+        <section class="header__search">
+          <AppSearch @btnClicked="searchApi()" />
+        </section>
       </div>
     </header>
     <!-- / HEADER -->
 
     <!-- MAIN -->
-    <AppMain />
+    <main class="bg-main main">
+      <div class="wrapper">
+        <AppMain />
+      </div>
+    </main>
     <!--/MAIN -->
   </div>
   <!-- /CONTAINER -->
@@ -81,7 +87,16 @@ export default {
 
 
 .header {
-  @include flex(row, space-between, center);
-  padding: 3em 0 1em;
+  height: $header-height;
+  @include flex(row, center, center);
+
+  &__flex {
+    @include flex(row, space-between, center);
+  }
+}
+
+.main {
+  height: calc(100vh - $header-height);
+  overflow-y: scroll;
 }
 </style>
