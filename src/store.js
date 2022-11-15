@@ -1,7 +1,9 @@
 import { reactive } from "vue";
 
 export const store = reactive({
-    loading: false,
+    loadingMovies: false,
+    loadingSeries: false,
+    // .finally(() => {this.store.loadingSeries = true})
     //API---------
     apiUrlInfo: "https://developers.themoviedb.org/3/getting-started/introduction",
     //SEARCH LINK

@@ -36,6 +36,7 @@ export default {
           }
           )
           .catch((err) => ("Error", err))
+          .finally(() => { this.store.loadingMovies = true })
         //SERIES
         axios.get(urlApiSeries, { params })
           .then((resp) => {
@@ -44,10 +45,12 @@ export default {
           }
           )
           .catch((err) => ("Error", err))
+          .finally(() => { this.store.loadingSeries = true })
       }
     }
   }
 }
+
 </script>
  
 <template>

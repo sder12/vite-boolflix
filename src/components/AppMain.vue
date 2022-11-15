@@ -11,14 +11,37 @@ export default {
         return {
             store
         }
+    },
+    computed: {
+        firstSearch() {
+            if (store.seriesTv.length == 0 && store.movies.length == 0
+                && this.store.loadingSeries == false && this.store.loadingMovies == false) {
+                return true
+            }
+        },
+        notFoundSearch() {
+            if (store.seriesTv.length == 0 && store.movies.length == 0
+                && this.store.loadingSeries == true && this.store.loadingMovies == true) {
+                return true
+            }
+        }
     }
 }
 </script>
  
 <template>
-    <!-- IF WE TYPE IN THE INPUT + BTN -->
-    <div v-if="store.apiSearchInput">
+    <!-- first research -->
+    <div v-if="firstSearch">
+        <span>fai la tua prima ricerca </span>
+    </div>
 
+    <!--  research without result -->
+    <div v-if="notFoundSearch">
+        <span> Nessun elemento trovato </span>
+    </div>
+
+    <!-- research with results -->
+    <div v-else>
         <!-- MOVIES CARDS -->
         <section v-if="store.movies.length !== 0">
             <h4>MOVIES</h4>
@@ -33,20 +56,10 @@ export default {
             <div class="poster-wrapper">
                 <AppMainCard class="poster-cards" v-for="serie in store.seriesTv" :key="serie.id" :item="serie" />
             </div>
-
         </section>
-
-        <!--  "Nessun elemento trovato" +  "Loading"
-        PROBLEMI CHIAMATA AXIOS ARRIVA DOPO COMPARE MSG PRIMA DEL CARICAMENTO DELLO STORE       
-        <div v-if="store.movies.length == 0 && store.seriesTv.length == 0 && store.apiSearchInput">
-            Nessun elemento trovato
-        </div> -->
     </div>
 
-    <!-- ELSE EMPTY INPUT -->
-    <div v-else>
-        <span>fai la tua prima ricerca </span>
-    </div>
+
 </template>
             
             
