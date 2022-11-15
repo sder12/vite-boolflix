@@ -4,15 +4,15 @@
 import { store } from "./store";
 import axios from "axios";
 
-import AppHeader from "./components/AppHeader.vue";
+import AppLogo from "./components/AppLogo.vue";
 import AppMain from "./components/AppMain.vue";
 import AppSearch from './components/AppSearch.vue';
 
 export default {
   components: {
-    AppHeader,
-    AppMain,
-    AppSearch
+    AppLogo,
+    AppSearch,
+    AppMain
   },
   data() {
     return {
@@ -51,11 +51,25 @@ export default {
 </script>
  
 <template>
+  <!-- CONTAINER -->
   <div class="container">
-    <AppHeader />
-    <AppSearch @btnClicked="searchApi()" />
+
+    <!-- HEADER -->
+    <header class="header">
+      <div class="header__menu">
+        <AppLogo />
+      </div>
+      <div class="header__search">
+        <AppSearch @btnClicked="searchApi()" />
+      </div>
+    </header>
+    <!-- / HEADER -->
+
+    <!-- MAIN -->
     <AppMain />
+    <!--/MAIN -->
   </div>
+  <!-- /CONTAINER -->
 </template>
  
 <style lang="scss">

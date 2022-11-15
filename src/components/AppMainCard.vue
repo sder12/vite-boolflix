@@ -3,30 +3,40 @@
 export default {
     name: "AppMainCard",
     props: {
+        //TITLE
         titleMain: String,
         titleOriginal: String,
+        //LANGUAGE
         languageImg: String,
         languageTxt: String,
-        vote: Number,
         //true countries flag // false  txt
         languageInStore: Boolean,
-        //img cover
+        //VOTE STARS NUMBERS
+        vote: Number,
+        voteNot: Number,
+        //POSTER IMG
         imgPoster: String,
-    },
+    }
 }
 </script>
  
 <template>
     <ul>
         <li>
-
             <div>
                 <img :src="imgPoster" :alt="titleMain">
             </div>
 
             <div>
-                <div>{{ titleMain }} </div>
-                <div>{{ titleOriginal }}</div>
+                <!-- TITLE -->
+                <div>
+                    {{ titleMain }}
+                </div>
+                <!-- ORIGINAL TITLE -->
+                <div v-show="titleMain !== titleOriginal">
+                    {{ titleOriginal }}
+                </div>
+                <!-- LANGUAGE -->
                 <div>
                     <div v-if="languageInStore">
                         <img :src="languageImg" :alt="languageTxt">
@@ -35,13 +45,24 @@ export default {
                         <p>{{ languageTxt }}</p>
                     </div>
                 </div>
-                <div>{{ vote }}</div>
+                <!-- STARS -->
+                <div>
+                    <ul>
+                        <li v-for="n in vote"> &starf;</li>
+                        <li v-for="m in voteNot"> &star;</li>
+                    </ul>
+                </div>
             </div>
+
         </li>
     </ul>
 </template>
  
 <style lang="scss" scoped>
+ul {
+    display: flex;
+}
+
 img {
     width: 40px;
 }

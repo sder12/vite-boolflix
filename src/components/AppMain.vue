@@ -13,84 +13,80 @@ export default {
         }
     },
     methods: {
+        //Language IMG  Flag ---> return src content
         getImageUrl(lan) {
             let urlImg = "";
-            if (lan == "en" || lan == "it" || lan == "es" || lan == "fr" || lan == "pt" || lan == "ja" || lan == "de" || lan == "ko") {
+            if (this.store.languages.includes(lan)) {
                 urlImg = `../assets/languages/${lan}.svg`
             } else {
                 urlImg = `data:,`
             }
             return new URL(urlImg, import.meta.url).href
-
-            // let urlImg = "";
-            // this.store.languages.forEach((item) => {
-            //     if (lan === item) {
-            //         urlImg = `../assets/languages/${lan}.svg`
-            //     } else {
-            //         urlImg = `data:,`
-            //     }
-            // })
-            // return new URL(urlImg, import.meta.url).href
-
         },
+        //Languages TEXT showing Img or Text--> return Boolean
         showImgOrTxt(lan) {
-            if (lan == "en" || lan == "it" || lan == "es" || lan == "fr" || lan == "pt" || lan == "ja" || lan == "de" || lan == "ko") {
+            if (this.store.languages.includes(lan)) {
                 //true showing Img
                 return true
             } else {
                 //false showing Text
                 return false
             }
-
-
-            // this.store.languages.forEach((item) => {
-            //     if (lan === item) {
-            //         //true si vedono bandiere
-            //         return true
-            //     } else {
-            //         //false 
-            //         return false
-            //     }
-            // })
-
+        },
+        //Full Star 
+        fifthsNumbers(number) {
+            let numbersFifth = Math.round(number / 2);
+            return numbersFifth
+        },
+        //Empty Star
+        calcOutOfFive(number) {
+            // const numbersFifth = fifts;
+            const numbersMinus = 5 - this.fifthsNumbers(number);
+            return numbersMinus
         }
     }
+
 }
 </script>
  
 <template>
+    <!-- IF WE TYPE IN THE INPUT + BTN -->
     <div v-if="store.apiSearchInput">
+
+        <!-- MOVIES CARDS -->
         <div v-if="store.movies.length !== 0">
             <h4>MOVIES</h4>
             <div class="poster-wrapper">
                 <AppMainCard class="poster-cards" v-for="(movie, index) in store.movies" :key="index"
                     :titleMain="movie.title" :titleOriginal="movie.original_title"
-                    :languageTxt="movie.original_language" :vote="movie.vote_average"
-                    :languageImg="getImageUrl(movie.original_language)"
+                    :languageTxt="movie.original_language" :vote="fifthsNumbers(movie.vote_average)"
+                    :voteNot="calcOutOfFive(movie.vote_average)" :languageImg="getImageUrl(movie.original_language)"
                     :languageInStore="showImgOrTxt(movie.original_language)"
                     :imgPoster="`${this.store.imgLink}${movie.poster_path}`" />
             </div>
         </div>
 
+        <!-- SERIES TV CARDS -->
         <div v-if="store.seriesTv.length !== 0">
             <h4>SERIES</h4>
             <div class="poster-wrapper">
                 <AppMainCard class="poster-cards" v-for="(series, index) in store.seriesTv" :key="index"
                     :titleMain="series.name" :titleOriginal="series.original_name"
-                    :languageTxt="series.original_language" :vote="series.vote_average"
-                    :languageImg="getImageUrl(series.original_language)"
+                    :languageTxt="series.original_language" :vote="fifthsNumbers(series.vote_average)"
+                    :voteNot="calcOutOfFive(series.vote_average)" :languageImg="getImageUrl(series.original_language)"
                     :languageInStore="showImgOrTxt(series.original_language)"
                     :imgPoster="`${this.store.imgLink}${series.poster_path}`" />
             </div>
         </div>
 
-        <!-- 
-        PROBLEMI CHIAMATA AXIOS ARRIVA DOPO COMPARE MSG PRIMA DEL CARICAMENTO DELLO STORE
+        <!--  "Nessun elemento trovato" +  "Loading"
+        PROBLEMI CHIAMATA AXIOS ARRIVA DOPO COMPARE MSG PRIMA DEL CARICAMENTO DELLO STORE       
         <div v-if="store.movies.length == 0 && store.seriesTv.length == 0 && store.apiSearchInput">
             Nessun elemento trovato
         </div> -->
     </div>
 
+    <!-- ELSE EMPTY INPUT -->
     <div v-else>
         <span>fai la tua prima ricerca </span>
     </div>

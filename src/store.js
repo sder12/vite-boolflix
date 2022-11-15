@@ -18,9 +18,13 @@ export const store = reactive({
     seriesTv: [],
 
     //LANGUAGES 
-    // languages: ["en", "it","es", "fr", "pt", "ja", "de", "ko"],
+    languages: ["en", "it", "es", "fr", "pt", "ja", "de", "ko", "sv", "da", "hi"],
 
     //IMAGES with w342
     imgLink: "https://image.tmdb.org/t/p/w342"
+
+    //STARS FONTAWSOME
+    // <font-awesome-icon icon="fa-solid fa-star" />
+    //<font-awesome-icon icon="fa-regular fa-star" />
 
 });

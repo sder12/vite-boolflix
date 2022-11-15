@@ -1,7 +1,7 @@
 <!-- HEADER -->
 <script>
 export default {
-    name: "AppHeader",
+    name: "AppLogo",
 }
 </script>
  
