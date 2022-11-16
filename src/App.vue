@@ -47,6 +47,12 @@ export default {
           .catch((err) => ("Error", err))
           .finally(() => { this.store.loadingSeries = true })
       }
+    },
+    restartSearching() {
+      this.store.loadingSeries = false;
+      this.store.loadingMovies = false;
+      this.store.seriesTv = [];
+      this.store.movies = [];
     }
   }
 }
@@ -61,7 +67,7 @@ export default {
     <header class="bg-header header">
       <div class="wrapper header__flex">
         <section class="header__menu">
-          <AppLogo />
+          <AppLogo @click="restartSearching" />
         </section>
         <section class="header__search">
           <AppSearch @btnClicked="searchApi()" />

@@ -9,9 +9,7 @@ export default {
     },
     data() {
         return {
-            store,
-            posterFront: true,
-            posterBack: false,
+            store
         }
     },
     methods: {
@@ -44,12 +42,12 @@ export default {
     <ul id="card">
         <li>
             <!-- FRONT -->
-            <div id="poster-front" v-show="posterFront">
+            <div id="poster-front">
                 <img :src="`${this.store.imgLink}${item.poster_path}`" :alt="item.title">
             </div>
 
             <!-- BACK -->
-            <div id="poster-back" v-show="posterBack">
+            <div id="poster-back">
                 <ul>
                     <!-- TITLE -->
                     <li>
@@ -100,10 +98,24 @@ export default {
 @use "../styles/partials/mixins" as *;
 @use "../styles/partials/variables" as *;
 
+// HOVER
+#poster-back {
+    display: none;
+}
+
+#card:hover #poster-front {
+    display: none;
+}
+
+#card:hover #poster-back {
+    display: block;
+}
+
 #card {
     background-color: $bg-header;
 }
 
+// STYLE
 #poster-front {
     width: 100%;
 

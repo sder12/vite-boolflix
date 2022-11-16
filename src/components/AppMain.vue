@@ -1,5 +1,6 @@
 <!-- MAIN -->
 <script>
+
 import { store } from "../store"
 import AppMainCard from './AppMainCard.vue';
 export default {
@@ -80,6 +81,10 @@ export default {
     padding: 4em;
     font-size: 1rem;
     text-transform: uppercase;
+}
+
+#search-not-found {
+    color: red;
 }
 
 //Movies Cards styling
