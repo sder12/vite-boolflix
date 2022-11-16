@@ -44,8 +44,8 @@ export default {
 </script>
  
 <template>
-    <div id="card">
-        <div id="inner">
+    <div class="card">
+        <div class="inner">
 
             <!-- FRONT -->
             <div id="poster-front">
@@ -100,37 +100,42 @@ export default {
 @use "../styles/partials/mixins" as *;
 @use "../styles/partials/variables" as *;
 
-//BACKGROUND CARD
-#card {
-    background-color: $bg-header;
+//TRANSFORM 3D
+.card {
+    //background-color: $bg-header;
+    //height: 100%;
     height: 350px;
     object-fit: cover;
-    position: relative;
+    //3D
+    perspective: 1000px;
+
+    &:hover .inner {
+        //3D       
+        transform: rotateY(180deg);
+    }
+
+    .inner {
+        height: 100%;
+        position: relative;
+        //3D
+        transform-style: preserve-3d;
+        transition: transform 1s;
+    }
 }
 
-#inner {
-    height: 100%;
+#poster-back,
+#poster-front {
+    backface-visibility: hidden;
 }
 
-// HOVER
-// #poster-back,
-// #card:hover #poster-front {
-//     display: none;
-// }
-
-// #card:hover #poster-back {
-//     display: block;
-// }
-
-
-//TRANSFORM 3D
 #poster-back {
-    height: 100%;
+    // background-color: rgba($bg-header, .8);
+    //3D
     position: absolute;
     top: 0;
     right: 0;
-    background-color: rgba($bg-header, .8);
     transform: rotateY(180deg);
+    background-color: $bg-header;
 }
 
 // STYLE
@@ -147,6 +152,7 @@ export default {
 
 #poster-back {
     width: 100%;
+    height: 100%;
     padding: 10px 20px;
 
     >* {
@@ -165,8 +171,14 @@ export default {
         }
     }
 
-    // #stars-vote ul {
-    //     @include flex(row, flex-start, center);
+    // HOVER
+    // #poster-back,
+    // #card:hover #poster-front {
+    //     display: none;
+    // }
+
+    // #card:hover #poster-back {
+    //     display: block;
     // }
 
 }

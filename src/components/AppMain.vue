@@ -118,7 +118,7 @@ h4 {
 
     .poster-cards {
         width: calc(100% / 4 - 1em);
-        border: 1px solid white;
+        // border: 1px solid white;
     }
 
 }
