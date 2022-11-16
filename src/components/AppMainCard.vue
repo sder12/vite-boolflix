@@ -103,6 +103,12 @@ export default {
 //BACKGROUND CARD
 #card {
     background-color: $bg-header;
+    height: 350px;
+    object-fit: cover;
+}
+
+#inner {
+    height: 100%;
 }
 
 // HOVER
@@ -118,10 +124,12 @@ export default {
 // STYLE
 #poster-front {
     width: 100%;
+    height: 100%;
 
     img {
         width: 100%;
-        display: block;
+        height: 100%;
+        object-fit: cover;
     }
 }
 

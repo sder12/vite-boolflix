@@ -109,10 +109,12 @@ h4 {
 }
 
 .poster-wrapper {
-    @include flex(row, flex-start, stretch);
+    @include flex(row, flex-start, flex-start);
     flex-wrap: wrap;
     gap: 1em;
     margin-left: 1em;
+
+
 
     .poster-cards {
         width: calc(100% / 4 - 1em);
