@@ -5,12 +5,14 @@ import { store } from "./store";
 import axios from "axios";
 
 import AppLogo from "./components/AppLogo.vue";
+import AppNav from "./components/AppNav.vue"
 import AppSearch from './components/AppSearch.vue';
 import AppMain from "./components/AppMain.vue";
 
 export default {
   components: {
     AppLogo,
+    AppNav,
     AppSearch,
     AppMain
   },
@@ -21,6 +23,8 @@ export default {
   },
   methods: {
     searchApi() {
+      this.store.activePag = "shows";
+      //URLs
       let urlApi = `${this.store.apiSearch}${this.store.apiGenreMovie}`
       let urlApiSeries = `${this.store.apiSearch}${this.store.apiGenreTv}`
       //PARAMS ObJ
@@ -49,6 +53,7 @@ export default {
       }
     },
     restartSearching() {
+      // this.store.activePag = "home";
       this.store.loadingSeries = false;
       this.store.loadingMovies = false;
       this.store.seriesTv = [];
@@ -68,8 +73,10 @@ export default {
       <div class="wrapper header__flex">
         <section class="header__menu">
           <AppLogo @click="restartSearching" />
+          <AppNav
+            @click="this.store.activePag == 'home' || this.store.activePag == 'about' ? restartSearching() : ''" />
         </section>
-        <section class="header__search">
+        <section class=" header__search">
           <AppSearch @btnClicked="searchApi()" />
         </section>
       </div>
@@ -98,6 +105,16 @@ export default {
 
   &__flex {
     @include flex(row, space-between, center);
+  }
+
+  &__menu {
+    @include flex(row, flex-start, center);
+    gap: 2em
+  }
+
+  &__search {
+    width: 40%;
+    @include flex(row, flex-end, center);
   }
 }
 

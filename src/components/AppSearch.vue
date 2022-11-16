@@ -27,8 +27,9 @@ export default {
  
 <template>
 
-    <label for="search" class="sr-only">Search a movie or a series TV</label>
-    <input type="search" id="search" placeholder="Search a movie - series" v-model="input" @keyup.enter="saveInput()">
+    <label for="search" class="sr-only">Search for movies or TV shows</label>
+    <input type="search" id="search" placeholder="Search for movies or TV shows" v-model="input"
+        @keyup.enter="saveInput()">
 
     <button class="btn btn-search pointer" @click="saveInput()"> Search </button>
 </template>
@@ -37,6 +38,7 @@ export default {
 @use "../styles/partials/variables" as *;
 
 #search {
+    width: 60%;
     padding: .5em 1em;
     border-radius: 6px;
     margin-right: 10px;

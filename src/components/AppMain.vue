@@ -39,17 +39,27 @@ export default {
 <template>
     <!-- first research -->
     <div v-if="firstSearch" id="search-first">
-        <span>
-            <i class="fa-solid fa-magnifying-glass"></i>
-            fai la tua prima ricerca
-        </span>
+        <div v-if="this.store.activePag !== 'about'">
+            <h2>Welcome to Boolfix</h2>
+            <h3> We are glad you're here! </h3>
+            <div>
+                <span v-if="this.store.activePag == 'home'">This is a website made with Vue+Vite</span>
+                <span v-if="this.store.activePag == 'shows'"> Look for any movie or TV show in our search bar</span>
+            </div>
+        </div>
+
+        <div class="about-us" v-if="this.store.activePag == 'about'">
+            <h2>About Us</h2>
+            <span>Lorem ipsum dolor sit amet consectetur adipisicing elit.</span>
+        </div>
     </div>
 
     <!--  research without result -->
     <div v-if="notFoundSearch" id="search-not-found">
         <span>
-            <i class="fa-solid fa-triangle-exclamation"></i>
-            Nessun elemento trovato
+            <i class="fa-solid fa-triangle-exclamation"></i> No results <i class="fa-solid fa-triangle-exclamation"></i>
+            <br>
+            There were no matches for your search term
         </span>
     </div>
 
@@ -88,12 +98,30 @@ export default {
 #search-not-found {
     text-align: center;
     padding: 4em;
-    font-size: 1rem;
-    text-transform: uppercase;
+}
+
+#search-first {
+    line-height: 3em;
+
+    h2 {
+        font-size: 3rem;
+    }
+
+    h3 {
+        font-size: 2rem;
+        font-weight: 200;
+    }
 }
 
 #search-not-found {
     color: red;
+    text-transform: uppercase;
+    font-size: 1rem;
+    line-height: 2em;
+}
+
+.about-us span {
+    font-style: italic;
 }
 
 //Movies-Series Cards styling
@@ -120,7 +148,6 @@ h4 {
         width: calc(100% / 4 - 1em);
         // border: 1px solid white;
     }
-
 }
 </style>
             
