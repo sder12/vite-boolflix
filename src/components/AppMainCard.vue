@@ -105,6 +105,7 @@ export default {
     background-color: $bg-header;
     height: 350px;
     object-fit: cover;
+    position: relative;
 }
 
 #inner {
@@ -112,13 +113,24 @@ export default {
 }
 
 // HOVER
-#poster-back,
-#card:hover #poster-front {
-    display: none;
-}
+// #poster-back,
+// #card:hover #poster-front {
+//     display: none;
+// }
 
-#card:hover #poster-back {
-    display: block;
+// #card:hover #poster-back {
+//     display: block;
+// }
+
+
+//TRANSFORM 3D
+#poster-back {
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: rgba($bg-header, .8);
+    transform: rotateY(180deg);
 }
 
 // STYLE
