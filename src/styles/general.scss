@@ -30,6 +30,7 @@ img {
     margin: 0 auto;
 }
 
+//COMMON
 .sr-only {
     display: none;
 }
@@ -38,10 +39,12 @@ li {
     list-style: none;
 }
 
-.btn {
+.pointer {
     cursor: pointer;
 }
 
+
+//COLOR BACKGROUND
 .bg-header {
     background-color: $bg-header;
 }

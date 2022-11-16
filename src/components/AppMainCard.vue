@@ -13,106 +13,106 @@ export default {
         }
     },
     methods: {
-        //Language IMG  Flag ---> return src content
-        getImageUrl(lan) {
+        //GET IMG BASIC 
+        getImagePath(pathImg) {
+            return new URL(pathImg, import.meta.url).href
+        },
+        //GET IMG for Language IMG  Flag ---> return src content
+        getImageLanguage(lan) {
             let urlImg = `../assets/languages/${lan}.svg`
             return new URL(urlImg, import.meta.url).href
         }
     },
     computed: {
         fullStars() {
-            const numbersStars = Math.round(parseInt(this.item.vote_average) / 2);
-            return numbersStars
+            return Math.round(parseInt(this.item.vote_average) / 2);
         },
-        emptyStars() {
-            const numbersNotStars = 5 - (Math.round(parseInt(this.item.vote_average) / 2));
-            return numbersNotStars
-        },
+        // emptyStars() {
+        //     return 5 - (Math.round(parseInt(this.item.vote_average) / 2));
+        // },
         getTitle() {
             return this.item.title ? this.item.title : this.item.name
         },
         getOriginalTitle() {
             return this.item.original_title ? this.item.original_title : this.item.original_name
+        },
+        getImage() {
+            return this.item.poster_path ? `${this.store.imgLink}${this.item.poster_path}` : this.getImagePath('../assets/not_found.jpg')
         }
     }
 }
 </script>
  
 <template>
-    <ul id="card">
-        <li>
+    <div id="card">
+        <div id="inner">
+
             <!-- FRONT -->
             <div id="poster-front">
-                <img :src="`${this.store.imgLink}${item.poster_path}`" :alt="item.title">
+                <!-- <img :src="`${this.store.imgLink}${item.poster_path}`" :alt="item.title"> -->
+                <!-- <img src="../assets/no-image.png" :alt="getTitle"> -->
+                <img :src="getImage" :alt="getTitle">
             </div>
 
             <!-- BACK -->
             <div id="poster-back">
-                <ul>
-                    <!-- TITLE -->
-                    <li>
-                        <div>
-                            <h5> Titolo </h5>{{ getTitle }}
-                        </div>
-                    </li>
+                <!-- TITLE -->
+                <div>
+                    <h5> Title </h5>
+                    {{ getTitle }}
+                </div>
+                <!-- ORIGINAL TITLE -->
+                <div v-show="getOriginalTitle !== getTitle">
+                    <h5> Original title</h5>
+                    {{ getOriginalTitle }}
+                </div>
+                <!-- STARS -->
+                <div id="stars-vote">
+                    <h5>Vote</h5>
+                    <!-- <ul>
+                        <li v-for="n in fullStars">
+                            <i class="fa-solid fa-star"></i>
+                        </li>
+                        <li v-for="m in emptyStars">
+                            <i class="fa-regular fa-star"></i>
+                        </li>
+                    </ul> -->
+                    <i v-for="n in 5" key="n" class="fa-star" :class="n <= fullStars ? 'fa-solid' : 'fa-regular'"> </i>
+                </div>
 
-                    <!-- ORIGINAL TITLE -->
-                    <li>
-                        <div v-show="getOriginalTitle !== getTitle">
-                            <h5> Titolo originale</h5>
-                            {{ getOriginalTitle }}
-                        </div>
-                    </li>
+                <!--LANGUAGE -->
+                <div id="language">
+                    <h5>Language </h5>
+                    <div v-if="this.store.languages.includes(item.original_language)">
+                        <img :src="getImageLanguage(item.original_language)" :alt="item.original_language">
+                    </div>
+                    <div v-else>
+                        <p>{{ item.original_language }}</p>
+                    </div>
+                </div>
 
-                    <!-- STARS -->
-                    <li>
-                        <h5>Voto</h5>
-                        <ul id="stars-vote">
-                            <li v-for="n in fullStars">
-                                <i class="fa-solid fa-star"></i>
-                            </li>
-                            <li v-for="m in emptyStars">
-                                <i class="fa-regular fa-star"></i>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <!-- LANGUAGE -->
-                    <li id="language">
-                        <h5>Language </h5>
-                        <div v-if="this.store.languages.includes(item.original_language)">
-                            <img :src="getImageUrl(item.original_language)" :alt="item.original_language">
-                        </div>
-                        <div v-else>
-                            <p>{{ item.original_language }}</p>
-                        </div>
-                    </li>
-
-                </ul>
             </div>
-        </li>
-    </ul>
+        </div>
+    </div>
 </template>
  
 <style lang="scss" scoped>
 @use "../styles/partials/mixins" as *;
 @use "../styles/partials/variables" as *;
 
-// HOVER
-#poster-back {
-    display: none;
+//BACKGROUND CARD
+#card {
+    background-color: $bg-header;
 }
 
+// HOVER
+#poster-back,
 #card:hover #poster-front {
     display: none;
 }
 
 #card:hover #poster-back {
     display: block;
-}
-
-#card {
-    background-color: $bg-header;
 }
 
 // STYLE
@@ -129,25 +129,25 @@ export default {
     width: 100%;
     padding: 10px 20px;
 
-    li {
-        margin: 5px 0;
+    >* {
+        margin-bottom: 5px;
     }
 
     h5 {
         text-transform: uppercase;
         color: darken(white, 30%);
-        padding: 6px 0 px;
+        padding: 5px 0px;
     }
 
     #language {
         img {
-            width: 20px;
+            max-width: 40px;
         }
     }
 
-    #stars-vote {
-        @include flex(row, flex-start, center);
-    }
+    // #stars-vote ul {
+    //     @include flex(row, flex-start, center);
+    // }
 
 }
 </style>

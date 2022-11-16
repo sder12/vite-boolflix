@@ -6,7 +6,7 @@ export default {
 </script>
  
 <template>
-    <h1 class="logo">Boolfix</h1>
+    <h1 class="logo pointer">Boolfix</h1>
 </template>
  
 <style lang="scss" scoped>

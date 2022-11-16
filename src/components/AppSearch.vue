@@ -30,7 +30,7 @@ export default {
     <label for="search" class="sr-only">Search a movie or a series TV</label>
     <input type="search" id="search" placeholder="Search a movie - series" v-model="input" @keyup.enter="saveInput()">
 
-    <button class="btn btn-search" @click="saveInput()"> Search </button>
+    <button class="btn btn-search pointer" @click="saveInput()"> Search </button>
 </template>
  
 <style lang="scss" scoped>
